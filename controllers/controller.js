@@ -2,6 +2,7 @@ const { FaceBook } = require("../models/facebook");
 
 const getHomepage = (req, res) => {
   FaceBook.find()
+    .sort({ createdAt: -1 })
     .then((result) => res.render("home", { result, err: null }))
     .catch((err) => res.render("home", { result: [], err: err.errors }));
 };
