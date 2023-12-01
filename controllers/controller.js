@@ -8,14 +8,27 @@ const getHomepage = (req, res) => {
 
 const submitFeed = (req, res) => {
   const facebook = new FaceBook(req.body);
-  console.log("body: ", req.body);
   facebook
     .save()
     .then((result) => res.redirect("/"))
     .catch((err) => res.render("/", { result: [], err: err.errors }));
 };
 
+const getFeed = (req, res) => {
+  FaceBook.findById({ _id: req.params.id })
+    .then((result) => res.render("viewFeed", { result }))
+    .catch((err) => console.log(err));
+};
+
+const deleteFeed = (req, res) => {
+  FaceBook.findByIdAndDelete({ _id: req.params.id })
+    .then((result) => res.redirect("/"))
+    .catch((err) => console.log(err));
+};
+
 module.exports = {
   getHomepage,
   submitFeed,
+  getFeed,
+  deleteFeed,
 };

@@ -1,8 +1,6 @@
 <%-include ("./component/header")%>
 
 <body class="container">
-  <p>hello world!</p>
-
   <form action="/submit-feed" method="POST">
     <div class="form-group">
       <label>Name</label>
@@ -16,5 +14,18 @@
 
     <button type="submit" class="btn btn-primary">Add a post</button>
   </form>
-  <%= result.length %>
+
+  <div class="result mt-4">
+    <% if (result.length > 0) { %> <% result.forEach(element => { %>
+    <div class="card mb-2 mt-2">
+      <div class="card-body">
+        <h5 class="card-title"><%= element.name %></h5>
+        <p class="card-text"><%= element.message %></p>
+        <a href="/find/<%= element.id %>" class="btn btn-primary">read more</a>
+      </div>
+    </div>
+    <% }); %> <% } else { %>
+    <p>There is no record.</p>
+    <% } %>
+  </div>
 </body>
