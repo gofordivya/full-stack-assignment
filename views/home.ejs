@@ -1,6 +1,7 @@
 <%-include ("./component/header")%>
 
 <body class="container">
+  <h2>Add post</h2>
   <form action="/submit-feed" method="POST">
     <div class="form-group">
       <label>Name</label>
@@ -21,7 +22,7 @@
       <div class="card-body">
         <h5 class="card-title"><%= element.name %></h5>
         <p class="card-text"><%= element.message %></p>
-        <a href="/find/<%= element.id %>" class="btn btn-primary">read more</a>
+        <a href="/feed/<%= element.id %>" class="btn btn-primary">read more</a>
       </div>
     </div>
     <% }); %> <% } else { %>

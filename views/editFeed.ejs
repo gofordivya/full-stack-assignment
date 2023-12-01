@@ -1,0 +1,23 @@
+<%-include ("./component/header")%>
+
+<h2>Edit post</h2>
+<form action="/update-article/<%= result.id %>" method="POST" class="container">
+  <div class="form-group">
+    <label>Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      value="<%= result.name %>"
+    />
+  </div>
+
+  <div class="form-group">
+    <label>Message</label>
+    <textarea class="form-control" name="message" rows="3">
+<%= result.message %></textarea
+    >
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

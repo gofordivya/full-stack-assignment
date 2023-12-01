@@ -20,6 +20,12 @@ const getFeed = (req, res) => {
     .catch((err) => console.log(err));
 };
 
+const editFeed = (req, res) => {
+  FaceBook.findById({ _id: req.params.id })
+    .then((result) => res.render("editFeed", { result }))
+    .catch((err) => console.log(err));
+};
+
 const deleteFeed = (req, res) => {
   FaceBook.findByIdAndDelete({ _id: req.params.id })
     .then((result) => res.redirect("/"))
@@ -31,4 +37,5 @@ module.exports = {
   submitFeed,
   getFeed,
   deleteFeed,
+  editFeed,
 };
