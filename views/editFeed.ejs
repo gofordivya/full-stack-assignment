@@ -1,13 +1,13 @@
 <%-include ("./component/header")%>
 
 <h2>Edit post</h2>
-<form action="/update-article/<%= result.id %>" method="POST" class="container">
+<form action="/feed/update/<%= result.id %>" method="POST" class="container">
   <div class="form-group">
     <label>Name</label>
     <input
       type="text"
       class="form-control"
-      name="title"
+      name="name"
       value="<%= result.name %>"
     />
   </div>
@@ -19,5 +19,5 @@
     >
   </div>
 
-  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="submit" class="btn btn-primary">Update</button>
 </form>

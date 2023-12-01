@@ -16,4 +16,6 @@ router.get("/feed/delete/:id", controller.deleteFeed);
 
 router.get("/feed/edit/:id", controller.editFeed);
 
+router.post("/feed/update/:id", controller.updateFeed);
+
 module.exports = router;

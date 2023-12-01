@@ -10,7 +10,7 @@ const submitFeed = (req, res) => {
   const facebook = new FaceBook(req.body);
   facebook
     .save()
-    .then((result) => res.redirect("/"))
+    .then(() => res.redirect("/"))
     .catch((err) => res.render("/", { result: [], err: err.errors }));
 };
 
@@ -28,7 +28,21 @@ const editFeed = (req, res) => {
 
 const deleteFeed = (req, res) => {
   FaceBook.findByIdAndDelete({ _id: req.params.id })
-    .then((result) => res.redirect("/"))
+    .then(() => res.redirect("/"))
+    .catch((err) => console.log(err));
+};
+
+const updateFeed = (req, res) => {
+  console.log("update called", req.params.id);
+  FaceBook.findByIdAndUpdate({ _id: req.params.id })
+    .then((result) => {
+      result.name = req.body.name;
+      result.message = req.body.message;
+      result
+        .save()
+        .then(() => res.redirect("/"))
+        .catch((err) => console.log(err));
+    })
     .catch((err) => console.log(err));
 };
 
@@ -38,4 +52,5 @@ module.exports = {
   getFeed,
   deleteFeed,
   editFeed,
+  updateFeed,
 };
