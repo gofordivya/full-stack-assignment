@@ -1,7 +1,7 @@
 <%-include ("./component/header")%>
 
-<h2>Edit post</h2>
 <form action="/feed/update/<%= result.id %>" method="POST" class="container">
+  <h2>Edit post</h2>
   <div class="form-group">
     <label>Name</label>
     <input
@@ -10,6 +10,11 @@
       name="name"
       value="<%= result.name %>"
     />
+    <% if (err && err.name) {%>
+    <small id="err" class="form-text text-muted">
+      <%= err["name"].message %></small
+    >
+    <% } %>
   </div>
 
   <div class="form-group">
@@ -17,6 +22,11 @@
     <textarea class="form-control" name="message" rows="3">
 <%= result.message %></textarea
     >
+    <% if (err && err.message) {%>
+    <small id="err" class="form-text text-muted">
+      <%= err["message"].message %></small
+    >
+    <% } %>
   </div>
 
   <button type="submit" class="btn btn-primary">Update</button>

@@ -11,7 +11,7 @@ const submitFeed = (req, res) => {
   facebook
     .save()
     .then(() => res.redirect("/"))
-    .catch((err) => res.render("/", { result: [], err: err.errors }));
+    .catch((err) => res.render("home", { result: [], err: err.errors }));
 };
 
 const getFeed = (req, res) => {
@@ -22,7 +22,7 @@ const getFeed = (req, res) => {
 
 const editFeed = (req, res) => {
   FaceBook.findById({ _id: req.params.id })
-    .then((result) => res.render("editFeed", { result }))
+    .then((result) => res.render("editFeed", { result, err: null }))
     .catch((err) => console.log(err));
 };
 
@@ -33,7 +33,6 @@ const deleteFeed = (req, res) => {
 };
 
 const updateFeed = (req, res) => {
-  console.log("update called", req.params.id);
   FaceBook.findByIdAndUpdate({ _id: req.params.id })
     .then((result) => {
       result.name = req.body.name;
@@ -41,7 +40,9 @@ const updateFeed = (req, res) => {
       result
         .save()
         .then(() => res.redirect("/"))
-        .catch((err) => console.log(err));
+        .catch((err) =>
+          res.render("editFeed", { result: [], err: err.errors })
+        );
     })
     .catch((err) => console.log(err));
 };
